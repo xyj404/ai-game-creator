@@ -2,6 +2,8 @@ import React from 'react';
 import { Header } from 'src/share/component/header';
 import { useGameStore } from 'src/store/game';
 import { AvatarArea } from 'src/page/game/avatarArea';
+import { Introduce } from './introduce';
+import { CreatorInfo } from './creatorInfo';
 
 import './index.less';
 
@@ -26,6 +28,10 @@ export const Game = () => {
             <div className='avatar-area-container'>
               <AvatarArea></AvatarArea>
             </div>
+          </div>
+          <div className='game-footer'>
+            <Introduce></Introduce>
+            <CreatorInfo></CreatorInfo>
           </div>
         </div>
       </div>

@@ -26,6 +26,7 @@ export const ChatInput = () => {
   return (
     <div className='chat-input-wrapper'>
       <Input
+        placeholder='有什么想告诉我的吗？'
         value={value}
         onChange={(e) => {
           setValue(e.target.value);
