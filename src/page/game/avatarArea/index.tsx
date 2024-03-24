@@ -21,6 +21,7 @@ export const AvatarArea = () => {
                 <img src={item.image} alt={item.name} />
                 <div>{item.name}</div>
                 <div
+                  className='avatar-item-chat'
                   onClick={() => {
                     setVisible(true);
                     setActiveAvatar(item);
