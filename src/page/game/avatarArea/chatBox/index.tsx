@@ -7,7 +7,7 @@ import { ArrowLeftOutlined } from '@ant-design/icons';
 import './index.less';
 
 export const ChatBox = ({ onBack }: { onBack: () => void }) => {
-  const { chatMap, activeAvatar } = useChatStore();
+  const { chatMap, activeAvatar, updatingChat } = useChatStore();
   const chatList = chatMap[activeAvatar.id];
   return (
     <div className='chat-box-wrapper'>
@@ -22,6 +22,9 @@ export const ChatBox = ({ onBack }: { onBack: () => void }) => {
         {chatList?.map((item) => {
           return <ChatInfo key={item.id} chatItem={item}></ChatInfo>;
         })}
+        {updatingChat && (
+          <ChatInfo key={updatingChat?.id} chatItem={updatingChat}></ChatInfo>
+        )}
       </div>
       <div className='chat-box-footer'>
         <ChatInput></ChatInput>

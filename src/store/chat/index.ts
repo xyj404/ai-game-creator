@@ -11,6 +11,7 @@ export const useChatStore = create<ChatStore>((set, get) => ({
   },
   setActiveAvatar: (activeAvatar) => {
     set({ activeAvatar });
+    console.log('setActiveAvatar', activeAvatar);
   },
   chatMap: {},
   updatingChat: null,
@@ -18,34 +19,45 @@ export const useChatStore = create<ChatStore>((set, get) => ({
     set({ chatMap: { ...get().chatMap, [get().activeAvatar.id]: value } });
   },
   addChat: (value: ChatItem) => {
+    const { activeAvatar, chatMap } = get();
+    console.log('addchat', get().activeAvatar.id, chatMap);
     set({
       chatMap: {
-        ...get().chatMap,
-        [get().activeAvatar.id]: [
-          ...get().chatMap[get().activeAvatar.id],
-          value
-        ]
+        ...chatMap,
+        [activeAvatar.id]: [...(chatMap[activeAvatar.id] || []), value]
       }
     });
   },
   getChat: () => {
     return new Promise((resolve) => {
       const chatDataArray = getBotChatData().split('');
+      console.log('chatDataArray', chatDataArray);
       const activeAvatar = get().activeAvatar;
       const getNewChat = (i: number) => {
         if (i < chatDataArray.length) {
-          set({
-            updatingChat: {
-              id: v4(),
-              content: chatDataArray[i],
-              avatarUrl: activeAvatar.image,
-              name: activeAvatar.name,
-              time: Date.now(),
-              type: 'bot',
-              isSelf: false,
-              isEnd: false
-            }
-          });
+          const { updatingChat } = get();
+          if (i === 0) {
+            set({
+              updatingChat: {
+                id: v4(),
+                content: chatDataArray[i],
+                avatarUrl: activeAvatar.image,
+                name: activeAvatar.name,
+                time: Date.now(),
+                type: 'bot',
+                isSelf: false,
+                isEnd: false
+              }
+            });
+          } else {
+            if (!updatingChat) return;
+            set({
+              updatingChat: {
+                ...updatingChat,
+                content: updatingChat.content + chatDataArray[i]
+              }
+            });
+          }
           setTimeout(() => {
             getNewChat(i + 1);
           }, 100);
