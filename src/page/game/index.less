@@ -1,12 +1,47 @@
 .game-wrapper {
   background-color: #101010;
   height: 100vh;
-  .game-content {
-    color: #fff;
-    font-size: 12px;
-    width: 780px;
-    .game-title {
-      font-size: 20px;
+  .game-container {
+    display: flex;
+    justify-content: center;
+    .game-content {
+      color: #fff;
+      font-size: 12px;
+      width: 780px;
+      .game-title {
+        text-align: left;
+        font-size: 20px;
+        margin-top: 20px;
+      }
+      .game-tags {
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+        .game-tag {
+          border: 1px solid #999;
+          margin-right: 8px;
+          border-radius: 4px;
+          padding: 0px 6px;
+        }
+      }
+      .game-inner {
+        margin-top: 20px;
+        height: 400px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        .game-player {
+          background-color: #1a1c1e;
+          flex-basis: 500px;
+          height: 100%;
+        }
+        .avatar-area-container {
+          width: 260px;
+          height: 100%;
+          margin-left: 20px;
+          overflow: scroll;
+        }
+      }
     }
   }
 }
